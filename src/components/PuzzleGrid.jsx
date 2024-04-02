@@ -1,6 +1,7 @@
 // components/PuzzleGrid.js
 import React, { useState } from 'react';
 import Sudoku from './puzzles/Sudoku';
+import NonogramPuzzle from './puzzles/Nonogram';
 
 function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
   const [randomComponent, setRandomComponent] = useState(null);
@@ -22,7 +23,8 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
       }
       {showComponent === 1 ?
         <>
-          <p>WAIT .</p>
+          <p>Nonogram puzzle grid.</p>
+          <NonogramPuzzle difficulty={difficulty} />
         </> : false
       }
       {showComponent === 2 ?

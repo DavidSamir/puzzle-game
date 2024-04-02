@@ -182,7 +182,7 @@ const Game2048 = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
         localStorage.setItem('2048', JSON.stringify(oldData));
         setShowComponent(undefined)
         setSeconds(0);
-        axios.post('http://localhost:3000/api/v1/twenty48', score)
+        axios.post('http://localhost:3000/api/v1/twenty48', newData)
           .then(response => {
             console.log('Score saved successfully:', response.data);
             // Handle success if needed

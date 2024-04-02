@@ -55,6 +55,11 @@ input.nos {
 .puzzle-row {
   display: flex;
 }
+.flex {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
 
 .puzzle-cell {
   width: 30px;

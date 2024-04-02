@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Scoreboard from '../Scoreboard';
 
 function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
   const [grid, setGrid] = useState([]);
@@ -163,27 +164,33 @@ function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
 
 
   return (
-    <div className="puzzle-grid">
-      {grid.map((row, rowIndex) => (
-        <div key={rowIndex} className="row">
-          {row.map((cell, colIndex) => (
-            <div key={colIndex} className={`cell ${highlightedCells.some(cell => cell.row === rowIndex && cell.col === colIndex && !cell.isValid) ? 'incorrect' : ''}`}>
-              {cell !== 0 ? (
-                cell
-              ) : (
-                <input
-                  type="text"
-                  maxLength="1"
-                  className={`nos ${highlightedCells.some(cell => cell.row === rowIndex && cell.col === colIndex && !cell.isValid) ? 'incorrect' : ''}`}
-                  onChange={(e) => handleInputChange(e, rowIndex, colIndex)}
-                />
-              )}
-            </div>
-          ))}
+    <>
+      <div className="puzzle-grid">
+        {grid.map((row, rowIndex) => (
+          <div key={rowIndex} className="row">
+            {row.map((cell, colIndex) => (
+              <div key={colIndex} className={`cell ${highlightedCells.some(cell => cell.row === rowIndex && cell.col === colIndex && !cell.isValid) ? 'incorrect' : ''}`}>
+                {cell !== 0 ? (
+                  cell
+                ) : (
+                  <input
+                    type="text"
+                    maxLength="1"
+                    className={`nos ${highlightedCells.some(cell => cell.row === rowIndex && cell.col === colIndex && !cell.isValid) ? 'incorrect' : ''}`}
+                    onChange={(e) => handleInputChange(e, rowIndex, colIndex)}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+        <div className='flex'>
+        <p onClick={() => { setShowComponent(undefined) }} className='btn'> Back </p>
+        <p onClick={() => { saveScore() }} className='btn'> save </p>
         </div>
-      ))}
-      <p onClick={() => { saveScore() }} className='btn'> save </p>
-    </div>
+      </div>
+      <Scoreboard seconds={seconds} />
+    </>
   );
 }
 

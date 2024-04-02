@@ -33,6 +33,13 @@ pool.connect((err, client, release) => {
       score INT,
       date TIMESTAMP,
       data JSONB
+    )`, `CREATE TABLE IF NOT EXISTS ticTacToe (
+      id SERIAL PRIMARY KEY,
+      time INT,
+      difficulty TEXT,
+      winner TEXT,
+      date TIMESTAMP,
+      data JSONB
     )`
     // Add more create table queries if needed
   ];

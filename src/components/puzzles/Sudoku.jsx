@@ -138,7 +138,6 @@ function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
       emptyCells: emptyCells,
       date:new Date(),
       data: grid
-
     }
   };
   const saveScore = () => {

@@ -2,11 +2,9 @@
 import React, { useState } from 'react';
 import Sudoku from './puzzles/Sudoku';
 import TicTacToe from './puzzles/TicTacToe';
-// import TicTacToe from './puzzles/TicTacToe';
 import Twenty48 from './puzzles/Twenty48';
 
 function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds, setSeconds }) {
-  const [randomComponent, setRandomComponent] = useState(null);
 
   const handleStartClick = () => {
     const randomIndex = Math.floor(Math.random() * 3);

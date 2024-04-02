@@ -146,8 +146,23 @@ const Game2048 = ({ difficulty }) => {
         if (moved) {
             addRandomTile(newBoard);
             setBoard(newBoard);
+            console.log('sss', newBoard)
+            setScore(getScore(newBoard));
+
         }
     };
+
+    function getScore(arrays) {
+        let sum = 0;
+        arrays.forEach(array => {
+            array.forEach(num => {
+                if (typeof num === 'number') {
+                    sum += num;
+                }
+            });
+        });
+        return sum;
+    }
 
 
     return (

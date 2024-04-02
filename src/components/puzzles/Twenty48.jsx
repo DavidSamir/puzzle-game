@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Scoreboard from '../Score2048';
+import axios from 'axios';
 
 const TILE_SIZE = 100;
 
@@ -181,15 +182,15 @@ const Game2048 = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
         localStorage.setItem('2048', JSON.stringify(oldData));
         setShowComponent(undefined)
         setSeconds(0);
-        // axios.post('http://localhost:3000/api/v1/ticTacToe', score)
-        //   .then(response => {
-        //     console.log('Score saved successfully:', response.data);
-        //     // Handle success if needed
-        //   })
-        //   .catch(error => {
-        //     console.error('Error saving score:', error);
-        //     // Handle error if needed
-        //   });
+        axios.post('http://localhost:3000/api/v1/twenty48', score)
+          .then(response => {
+            console.log('Score saved successfully:', response.data);
+            // Handle success if needed
+          })
+          .catch(error => {
+            console.error('Error saving score:', error);
+            // Handle error if needed
+          });
     };
     return (
         <>

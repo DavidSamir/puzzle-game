@@ -21,9 +21,9 @@ function App() {
       <header>
         <h4>Puzzle Game</h4>
         <div>
-          <p onClick={() => { setShowComponent(0) }}>2048</p>
-          <p onClick={() => { setShowComponent(1) }}>Sudoku</p>
-          <p onClick={() => { setShowComponent(2) }}>Tic-Tac-Toe</p>
+          <p onClick={() => { setShowComponent(2) }}>2048</p>
+          <p onClick={() => { setShowComponent(0) }}>Sudoku</p>
+          <p onClick={() => { setShowComponent(1) }}>Tic-Tac-Toe</p>
         </div>
       </header>
       <div className='body'>

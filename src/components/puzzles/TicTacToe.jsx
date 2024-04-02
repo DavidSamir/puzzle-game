@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const TicTacToe = ({ difficulty }) => {
+const TicTacToe = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const winner = calculateWinner(board);
-  
+
   useEffect(() => {
     if (!xIsNext && winner === null) {
       const timeout = setTimeout(() => {
         makeComputerMove();
-      }, 500);
+      }, 1);
       return () => clearTimeout(timeout);
     }
   }, [board, xIsNext, winner]);
@@ -31,10 +31,8 @@ const TicTacToe = ({ difficulty }) => {
     if (difficulty === 'easy') {
       computerMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
     } else if (difficulty === 'medium') {
-      // Implement medium difficulty strategy
       computerMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
     } else if (difficulty === 'hard') {
-      // Implement hard difficulty strategy
       computerMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
     }
     const newBoard = [...board];
@@ -73,6 +71,11 @@ const TicTacToe = ({ difficulty }) => {
         {renderSquare(7)}
         {renderSquare(8)}
       </div>
+      <div className='flex'>
+        <p onClick={() => { setShowComponent(undefined); setSeconds(0) }} className='btn'> Back </p>
+        <p onClick={() => { saveScore() }} className='btn'> save </p>
+      </div>
+
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PuzzleGrid from './components/PuzzleGrid';
 import Timer from './components/Timer';
 import DifficultySelector from './components/DifficultySelector';
-import Scoreboard from './components/Scoreboard';
+import Scoreboard from './components/ScoreSudoku';
 import './App.css'
 
 

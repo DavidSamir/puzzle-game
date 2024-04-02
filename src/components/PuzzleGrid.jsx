@@ -26,7 +26,6 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds, setS
         <>
           <p>Tic-Tac-Toe puzzle grid.</p>
           <TicTacToe difficulty={difficulty} seconds={seconds} setShowComponent={setShowComponent} setSeconds={setSeconds} />
-          {/* <NonogramPuzzle difficulty={difficulty} /> */}
         </> : false
       }
     </div >

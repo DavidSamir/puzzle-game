@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Scoreboard from '../Scoreboard';
+import Scoreboard from '../ScoreSudoku';
 
 function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
   const [grid, setGrid] = useState([]);
@@ -158,7 +158,6 @@ function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
         console.error('Error saving score:', error);
         // Handle error if needed
       });
-
   };
 
 
@@ -185,8 +184,8 @@ function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
           </div>
         ))}
         <div className='flex'>
-        <p onClick={() => { setShowComponent(undefined) }} className='btn'> Back </p>
-        <p onClick={() => { saveScore() }} className='btn'> save </p>
+          <p onClick={() => {  setShowComponent(undefined); setSeconds(0)  }} className='btn'> Back </p>
+          <p onClick={() => { saveScore() }} className='btn'> save </p>
         </div>
       </div>
       <Scoreboard seconds={seconds} />

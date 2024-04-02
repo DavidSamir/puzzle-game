@@ -24,7 +24,8 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
       {showComponent === 1 ?
         <>
           <p>Nonogram puzzle grid.</p>
-          <NonogramPuzzle difficulty={difficulty} />
+          <Sudoku difficulty={difficulty} />
+          {/* <NonogramPuzzle difficulty={difficulty} /> */}
         </> : false
       }
     </div >

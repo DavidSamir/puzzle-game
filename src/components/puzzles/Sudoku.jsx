@@ -2,24 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 function Sudoku({ difficulty }) {
   const [grid, setGrid] = useState([]);
+  const [highlightedCells, setHighlightedCells] = useState([]);
+
 
   useEffect(() => {
-    // Generate puzzle grid when component mounts
     const generatedGrid = generateSudoku(difficulty);
     setGrid(generatedGrid);
   }, [difficulty]);
 
-  // Function to generate a Sudoku grid
   const generateSudoku = (difficulty) => {
-    // Helper function to shuffle an array
-    // const shuffleArray = (array) => {
-    //   for (let i = array.length - 1; i > 0; i--) {
-    //     const j = Math.floor(Math.random() * (i + 1));
-    //     [array[i], array[j]] = [array[j], array[i]];
-    //   }
-    //   return array;
-    // };
-
     const isValidNumber = (grid, row, col, num) => {
       for (let i = 0; i < 9; i++) {
         if (grid[row][i] === num) {
@@ -97,24 +88,61 @@ function Sudoku({ difficulty }) {
 
     return emptyGrid;
   };
+
+
+
   const handleInputChange = (e, rowIndex, colIndex) => {
+    const inputValue = e.target.value !== '' ? parseInt(e.target.value, 10) : '';
     const newGrid = [...grid];
-    newGrid[rowIndex][colIndex] = e.target.value !== '' ? parseInt(e.target.value, 10) : '';
+    newGrid[rowIndex][colIndex] = inputValue;
     setGrid(newGrid);
+
+    const isValidPlacement = isValidNumber(newGrid, rowIndex, colIndex, inputValue);
+    setHighlightedCells([{ row: rowIndex, col: colIndex, isValid: isValidPlacement }]);
   };
+  const isValidNumber = (grid, row, col, num) => {
+    if (num === '') return true; // Empty cell is always considered valid
+  
+    for (let i = 0; i < 9; i++) {
+      if (grid[row][i] === num && i !== col) {
+        return false;
+      }
+    }
+  
+    for (let i = 0; i < 9; i++) {
+      if (grid[i][col] === num && i !== row) {
+        return false;
+      }
+    }
+  
+    const startRow = Math.floor(row / 3) * 3;
+    const startCol = Math.floor(col / 3) * 3;
+    for (let i = startRow; i < startRow + 3; i++) {
+      for (let j = startCol; j < startCol + 3; j++) {
+        if (grid[i][j] === num && (i !== row || j !== col)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  
+
+
+
   return (
     <div className="puzzle-grid">
       {grid.map((row, rowIndex) => (
         <div key={rowIndex} className="row">
           {row.map((cell, colIndex) => (
-            <div key={colIndex} className="cell">
+            <div key={colIndex} className={`cell ${highlightedCells.some(cell => cell.row === rowIndex && cell.col === colIndex && !cell.isValid) ? 'incorrect' : ''}`}>
               {cell !== 0 ? (
                 cell
               ) : (
                 <input
                   type="text"
-                  className='nos'
                   maxLength="1"
+                  className={`nos ${highlightedCells.some(cell => cell.row === rowIndex && cell.col === colIndex && !cell.isValid) ? 'incorrect' : ''}`}
                   onChange={(e) => handleInputChange(e, rowIndex, colIndex)}
                 />
               )}

@@ -65,3 +65,11 @@ input.nos {
 .puzzle-cell.filled {
   background-color: #333;
 }
+
+.incorrect {
+  background-color: #ffcccc !important;
+}
+
+.correct {
+  background-color: #ccffcc !important;
+}

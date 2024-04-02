@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Sudoku from './puzzles/Sudoku';
 import NonogramPuzzle from './puzzles/Nonogram';
 
-function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
+function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds }) {
   const [randomComponent, setRandomComponent] = useState(null);
 
   const handleStartClick = () => {
@@ -18,13 +18,13 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
       {showComponent === 0 ?
         <>
           <p>Sudoku puzzle grid.</p>
-          <Sudoku difficulty={difficulty} />
+          <Sudoku difficulty={difficulty} seconds={seconds} />
         </> : false
       }
       {showComponent === 1 ?
         <>
           <p>Nonogram puzzle grid.</p>
-          <Sudoku difficulty={difficulty} />
+          <Sudoku difficulty={difficulty} seconds={seconds} />
           {/* <NonogramPuzzle difficulty={difficulty} /> */}
         </> : false
       }

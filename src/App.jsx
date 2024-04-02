@@ -9,6 +9,8 @@ import './App.css'
 function App() {
   const [difficulty, setDifficulty] = useState('easy');
   const [showComponent, setShowComponent] = useState(undefined);
+  const [seconds, setSeconds] = useState(0);
+
 
   const handleDifficultyChange = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty);
@@ -18,8 +20,8 @@ function App() {
     <div className="App">
       <h1>Puzzle Game</h1>
       <DifficultySelector difficulty={difficulty} onChange={handleDifficultyChange} />
-      <Timer start={showComponent} />
-      <PuzzleGrid difficulty={difficulty} showComponent={showComponent} setShowComponent={setShowComponent} />
+      <Timer start={showComponent} seconds={seconds} setSeconds={setSeconds} />
+      <PuzzleGrid difficulty={difficulty} showComponent={showComponent} setShowComponent={setShowComponent} seconds={seconds} />
       <Scoreboard />
     </div>
   );

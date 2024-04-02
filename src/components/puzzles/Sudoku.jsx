@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Sudoku({ difficulty }) {
+function Sudoku({ difficulty, seconds }) {
   const [grid, setGrid] = useState([]);
   const [highlightedCells, setHighlightedCells] = useState([]);
 
@@ -101,20 +101,20 @@ function Sudoku({ difficulty }) {
     setHighlightedCells([{ row: rowIndex, col: colIndex, isValid: isValidPlacement }]);
   };
   const isValidNumber = (grid, row, col, num) => {
-    if (num === '') return true; // Empty cell is always considered valid
-  
+    if (num === '') return true;
+
     for (let i = 0; i < 9; i++) {
       if (grid[row][i] === num && i !== col) {
         return false;
       }
     }
-  
+
     for (let i = 0; i < 9; i++) {
       if (grid[i][col] === num && i !== row) {
         return false;
       }
     }
-  
+
     const startRow = Math.floor(row / 3) * 3;
     const startCol = Math.floor(col / 3) * 3;
     for (let i = startRow; i < startRow + 3; i++) {
@@ -126,8 +126,18 @@ function Sudoku({ difficulty }) {
     }
     return true;
   };
-  
 
+
+  const calculateScore = () => {
+    const timeTaken = seconds; // in seconds
+    const incorrectCells = highlightedCells.filter(cell => !cell.isValid).length;
+    const emptyCells = grid.reduce((acc, row) => acc + row.filter(cell => cell === 0).length, 0);
+    return `${timeTaken}-${incorrectCells}-${emptyCells}`;
+  };
+  const saveScore = () => {
+    const score = calculateScore();
+    localStorage.setItem('sudokuScore', score);
+  };
 
 
   return (
@@ -150,6 +160,7 @@ function Sudoku({ difficulty }) {
           ))}
         </div>
       ))}
+      <p onClick={() => { saveScore() }}> save </p>
     </div>
   );
 }

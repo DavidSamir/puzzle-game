@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
   const [grid, setGrid] = useState([]);
@@ -136,18 +137,27 @@ function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
       time: timeTaken,
       incorrectCells: incorrectCells,
       emptyCells: emptyCells,
-      date:new Date(),
+      date: new Date(),
       data: grid
     }
   };
   const saveScore = () => {
     let scores = JSON.parse(localStorage.getItem('sudokuScore')) || [];
     const score = calculateScore();
-    console.log(scores)
     scores.push(score);
     localStorage.setItem('sudokuScore', JSON.stringify(scores));
     setShowComponent(undefined)
-    setSeconds(0)
+    setSeconds(0);
+    axios.post('http://localhost:3000/api/v1/sudoku', score)
+      .then(response => {
+        console.log('Score saved successfully:', response.data);
+        // Handle success if needed
+      })
+      .catch(error => {
+        console.error('Error saving score:', error);
+        // Handle error if needed
+      });
+
   };
 
 

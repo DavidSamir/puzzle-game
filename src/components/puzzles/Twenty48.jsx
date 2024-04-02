@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const TILE_SIZE = 100;
 
-const Game2048 = ({ difficulty }) => {
+const Game2048 = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
     const [board, setBoard] = useState([]);
     const [score, setScore] = useState(0);
 
@@ -146,7 +146,6 @@ const Game2048 = ({ difficulty }) => {
         if (moved) {
             addRandomTile(newBoard);
             setBoard(newBoard);
-            console.log('sss', newBoard)
             setScore(getScore(newBoard));
 
         }
@@ -165,19 +164,50 @@ const Game2048 = ({ difficulty }) => {
     }
 
 
+    const calculateScore = () => {
+        return {
+            time: seconds,
+            date: new Date(),
+            data: board,
+            score: score
+        }
+    }
+    const saveScore = () => {
+        let oldData = JSON.parse(localStorage.getItem('2048')) || [];
+        const newData = calculateScore();
+        oldData.push(newData);
+        localStorage.setItem('2048', JSON.stringify(oldData));
+        setShowComponent(undefined)
+        setSeconds(0);
+        // axios.post('http://localhost:3000/api/v1/ticTacToe', score)
+        //   .then(response => {
+        //     console.log('Score saved successfully:', response.data);
+        //     // Handle success if needed
+        //   })
+        //   .catch(error => {
+        //     console.error('Error saving score:', error);
+        //     // Handle error if needed
+        //   });
+    };
     return (
-        <div className="game-container" tabIndex="0">
-            <div className="score">Score: {score}</div>
-            <div className="board">
-                {board.map((row, rowIndex) => (
-                    <div key={rowIndex} className="row">
-                        {row.map((cell, cellIndex) => (
-                            <div key={cellIndex} className={`cell cell-${cell}`}>{cell !== 0 && cell}</div>
-                        ))}
-                    </div>
-                ))}
+        <>
+            <div className="game-container" tabIndex="0">
+                <div className="score">Score: {score}</div>
+                <div className="board">
+                    {board.map((row, rowIndex) => (
+                        <div key={rowIndex} className="row">
+                            {row.map((cell, cellIndex) => (
+                                <div key={cellIndex} className={`cell cell-${cell}`}>{cell !== 0 && cell}</div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
+            <div className='flex'>
+                <p onClick={() => { setShowComponent(undefined); setSeconds(0) }} className='btn'> Back </p>
+                <p onClick={() => { saveScore() }} className='btn'> save </p>
+            </div>
+        </>
     );
 };
 

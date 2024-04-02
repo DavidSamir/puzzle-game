@@ -12,29 +12,26 @@ function Sudoku({ difficulty }) {
   // Function to generate a Sudoku grid
   const generateSudoku = (difficulty) => {
     // Helper function to shuffle an array
-    const shuffleArray = (array) => {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    };
+    // const shuffleArray = (array) => {
+    //   for (let i = array.length - 1; i > 0; i--) {
+    //     const j = Math.floor(Math.random() * (i + 1));
+    //     [array[i], array[j]] = [array[j], array[i]];
+    //   }
+    //   return array;
+    // };
 
-    // Helper function to check if a number is valid in a cell
     const isValidNumber = (grid, row, col, num) => {
-      // Check if the number is already in the row
       for (let i = 0; i < 9; i++) {
         if (grid[row][i] === num) {
           return false;
         }
       }
-      // Check if the number is already in the column
+
       for (let i = 0; i < 9; i++) {
         if (grid[i][col] === num) {
           return false;
         }
       }
-      // Check if the number is already in the 3x3 subgrid
       const startRow = Math.floor(row / 3) * 3;
       const startCol = Math.floor(col / 3) * 3;
       for (let i = startRow; i < startRow + 3; i++) {
@@ -47,7 +44,6 @@ function Sudoku({ difficulty }) {
       return true;
     };
 
-    // Helper function to solve the Sudoku grid using backtracking
     const solveSudoku = (grid) => {
       for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
@@ -69,7 +65,6 @@ function Sudoku({ difficulty }) {
       return true;
     };
 
-    // Helper function to remove numbers from the solved grid to create a puzzle
     const removeNumbers = (grid, difficulty) => {
       let count;
       switch (difficulty) {
@@ -95,13 +90,9 @@ function Sudoku({ difficulty }) {
       }
     };
 
-    // Create an empty grid
     const emptyGrid = Array.from({ length: 9 }, () => Array(9).fill(0));
 
-    // Solve the empty grid
     solveSudoku(emptyGrid);
-
-    // Remove numbers to create the puzzle grid
     removeNumbers(emptyGrid, difficulty);
 
     return emptyGrid;
@@ -113,7 +104,6 @@ function Sudoku({ difficulty }) {
   };
   return (
     <div className="puzzle-grid">
-      {/* Display the puzzle grid */}
       {grid.map((row, rowIndex) => (
         <div key={rowIndex} className="row">
           {row.map((cell, colIndex) => (

@@ -129,15 +129,25 @@ function Sudoku({ difficulty, seconds }) {
 
 
   const calculateScore = () => {
-    const timeTaken = seconds; // in seconds
+    const timeTaken = seconds;
     const incorrectCells = highlightedCells.filter(cell => !cell.isValid).length;
     const emptyCells = grid.reduce((acc, row) => acc + row.filter(cell => cell === 0).length, 0);
-    return `${timeTaken}-${incorrectCells}-${emptyCells}`;
+    return {
+      time: timeTaken,
+      incorrectCells: incorrectCells,
+      emptyCells: emptyCells,
+      data: grid
+
+    }
   };
   const saveScore = () => {
+    let scores = JSON.parse(localStorage.getItem('sudokuScore')) || [];
     const score = calculateScore();
-    localStorage.setItem('sudokuScore', score);
+    scores.push(score);
+    localStorage.setItem('sudokuScore', JSON.stringify(scores));
+    setShowComponent(undefined)
   };
+
 
 
   return (

@@ -18,13 +18,13 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds }) {
       {showComponent === 0 ?
         <>
           <p>Sudoku puzzle grid.</p>
-          <Sudoku difficulty={difficulty} seconds={seconds} />
+          <Sudoku difficulty={difficulty} seconds={seconds} setShowComponent={setShowComponent} />
         </> : false
       }
       {showComponent === 1 ?
         <>
           <p>Nonogram puzzle grid.</p>
-          <Sudoku difficulty={difficulty} seconds={seconds} />
+          <Sudoku difficulty={difficulty} seconds={seconds} setShowComponent={setShowComponent} />
           {/* <NonogramPuzzle difficulty={difficulty} /> */}
         </> : false
       }

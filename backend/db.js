@@ -22,7 +22,7 @@ connection.connect((err) => {
       incorrect_cells INT,
       empty_cells INT,
       date DATETIME,
-      sudoku JSON
+      data JSON
     )`, (err) => {
     if (err) {
       console.error('Error creating sudoku table:', err);

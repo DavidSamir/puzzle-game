@@ -55,6 +55,7 @@ const TicTacToe = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
       time: seconds,
       date: new Date(),
       data: board,
+      difficulty:difficulty,
       winner: calculateWinner(board)
     }
   }

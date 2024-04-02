@@ -170,6 +170,7 @@ const Game2048 = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
             time: seconds,
             date: new Date(),
             data: board,
+            difficulty: difficulty,
             score: score
         }
     }
@@ -208,7 +209,7 @@ const Game2048 = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
                 <p onClick={() => { setShowComponent(undefined); setSeconds(0) }} className='btn'> Back </p>
                 <p onClick={() => { saveScore() }} className='btn'> save </p>
             </div>
-            <Scoreboard/>
+            <Scoreboard />
         </>
     );
 };

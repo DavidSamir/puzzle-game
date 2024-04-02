@@ -3,20 +3,28 @@
 
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import axios from 'axios';
 
 const ScoreTicTacToe = ({ seconds }) => {
   const [tableData, setTableData] = useState([]);
-
   useEffect(() => {
-    const localStorageData = JSON.parse(localStorage.getItem('ticTacToe'));
-    if (localStorageData) {
-      // Sort tableData in reverse order based on the 'time' property
-      const sortedData = localStorageData.sort((a, b) => b.time - a.time);
-      setTableData(sortedData);
-    }
 
-  }, [seconds]);
+    axios.get('http://localhost:3000/api/v1/ticTacToe')
+    .then(response => {
+      if (response.status ==200 ) {
+        setTableData(response.data)
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      const localStorageData = JSON.parse(localStorage.getItem('ticTacToe'));
+      if (localStorageData) {
+        const sortedData = localStorageData.sort((a, b) => b.time - a.time);
+        setTableData(sortedData);
+      }
+    });
 
+  }, []);
   return (
     <div className="table-container">
       <h2>Score</h2>

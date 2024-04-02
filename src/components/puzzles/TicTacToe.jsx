@@ -67,7 +67,7 @@ const TicTacToe = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
     localStorage.setItem('ticTacToe', JSON.stringify(scores));
     setShowComponent(undefined)
     setSeconds(0);
-    axios.post('http://localhost:3000/api/v1/ticTacToe', score)
+    axios.post('http://165.232.75.204:3000/api/v1/ticTacToe', score)
       .then(response => {
         console.log('Score saved successfully:', response.data);
         // Handle success if needed

@@ -11,7 +11,7 @@ const Scoreboard = ({ seconds }) => {
 
   useEffect(() => {
 
-    axios.get('http://localhost:3000/api/v1/sudoku')
+    axios.get('http://165.232.75.204:3000/api/v1/sudoku')
     .then(response => {
       if (response.status ==200 ) {
         setTableData(response.data)

@@ -9,7 +9,7 @@ const Scoreboard = ({ seconds }) => {
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
 
-    axios.get('http://localhost:3000/api/v1/twenty48')
+    axios.get('http://165.232.75.204:3000/api/v1/twenty48')
       .then(response => {
         if (response.status == 200) {
           setTableData(response.data)

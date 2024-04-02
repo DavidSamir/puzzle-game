@@ -9,7 +9,7 @@ const ScoreTicTacToe = ({ seconds }) => {
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
 
-    axios.get('http://localhost:3000/api/v1/ticTacToe')
+    axios.get('http://165.232.75.204:3000/api/v1/ticTacToe')
     .then(response => {
       if (response.status ==200 ) {
         setTableData(response.data)

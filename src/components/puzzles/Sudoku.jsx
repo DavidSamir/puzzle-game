@@ -182,7 +182,7 @@ function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
           ))}
         </div>
       ))}
-      <p onClick={() => { saveScore() }}> save </p>
+      <p onClick={() => { saveScore() }} className='btn'> save </p>
     </div>
   );
 }

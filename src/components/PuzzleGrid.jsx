@@ -1,6 +1,7 @@
 // components/PuzzleGrid.js
 import React, { useState } from 'react';
 import Sudoku from './puzzles/Sudoku';
+import TicTacToe from './puzzles/TicTacToe';
 import NonogramPuzzle from './puzzles/Nonogram';
 
 function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds, setSeconds }) {
@@ -23,8 +24,8 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds, setS
       }
       {showComponent === 1 ?
         <>
-          <p>Nonogram puzzle grid.</p>
-          <Sudoku difficulty={difficulty} seconds={seconds} setShowComponent={setShowComponent} setSeconds={setSeconds} />
+          <p>Tic-Tac-Toe puzzle grid.</p>
+          <TicTacToe difficulty={difficulty} seconds={seconds} setShowComponent={setShowComponent} setSeconds={setSeconds} />
           {/* <NonogramPuzzle difficulty={difficulty} /> */}
         </> : false
       }

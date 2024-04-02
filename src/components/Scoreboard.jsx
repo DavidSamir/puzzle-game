@@ -2,8 +2,9 @@
 
 
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
-const Scoreboard = () => {
+const Scoreboard = ({seconds}) => {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -11,7 +12,7 @@ const Scoreboard = () => {
     if (localStorageData) {
       setTableData(localStorageData);
     }
-  }, []);
+  }, [seconds]);
 
   return (
     <div className="table-container">
@@ -22,7 +23,7 @@ const Scoreboard = () => {
             <th className="table-header">Time</th>
             <th className="table-header">Incorrect Cells</th>
             <th className="table-header">Empty Cells</th>
-            {/* <th className="table-header">Data</th> */}
+            <th className="table-header">Date</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +32,7 @@ const Scoreboard = () => {
               <td className="table-data">{item.time} <small>Seconds</small></td>
               <td className="table-data">{item.incorrectCells}</td>
               <td className="table-data">{item.emptyCells}</td>
-              {/* <td className="table-data">{item.data}</td> */}
+              <td className="table-data">{moment(item.date).fromNow()}</td>
             </tr>
           ))}
         </tbody>

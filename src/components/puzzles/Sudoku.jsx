@@ -136,6 +136,7 @@ function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
       time: timeTaken,
       incorrectCells: incorrectCells,
       emptyCells: emptyCells,
+      date:new Date(),
       data: grid
 
     }

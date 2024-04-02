@@ -18,10 +18,19 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Puzzle Game</h1>
-      <DifficultySelector difficulty={difficulty} onChange={handleDifficultyChange} />
-      <Timer start={showComponent} seconds={seconds} setSeconds={setSeconds} />
-      <PuzzleGrid difficulty={difficulty} showComponent={showComponent} setShowComponent={setShowComponent} seconds={seconds} setSeconds={setSeconds} />
+      <header>
+        <h4>Puzzle Game</h4>
+        <div>
+          <p onClick={() => { setShowComponent(0) }}>2048</p>
+          <p onClick={() => { setShowComponent(1) }}>Sudoku</p>
+          <p onClick={() => { setShowComponent(2) }}>Tic-Tac-Toe</p>
+        </div>
+      </header>
+      <div className='body'>
+        <DifficultySelector difficulty={difficulty} onChange={handleDifficultyChange} />
+        <Timer start={showComponent} seconds={seconds} setSeconds={setSeconds} />
+        <PuzzleGrid difficulty={difficulty} showComponent={showComponent} setShowComponent={setShowComponent} seconds={seconds} setSeconds={setSeconds} />
+      </div>
     </div>
   );
 }

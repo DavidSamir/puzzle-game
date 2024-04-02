@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Scoreboard from '../Score2048';
 
 const TILE_SIZE = 100;
 
@@ -207,6 +208,7 @@ const Game2048 = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
                 <p onClick={() => { setShowComponent(undefined); setSeconds(0) }} className='btn'> Back </p>
                 <p onClick={() => { saveScore() }} className='btn'> save </p>
             </div>
+            <Scoreboard/>
         </>
     );
 };

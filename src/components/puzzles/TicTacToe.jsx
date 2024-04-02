@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ScoreTicTacToe from '../ScoreticTacToe';
+import axios from 'axios';
 
 const TicTacToe = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -66,15 +67,15 @@ const TicTacToe = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
     localStorage.setItem('ticTacToe', JSON.stringify(scores));
     setShowComponent(undefined)
     setSeconds(0);
-    // axios.post('http://localhost:3000/api/v1/ticTacToe', score)
-    //   .then(response => {
-    //     console.log('Score saved successfully:', response.data);
-    //     // Handle success if needed
-    //   })
-    //   .catch(error => {
-    //     console.error('Error saving score:', error);
-    //     // Handle error if needed
-    //   });
+    axios.post('http://localhost:3000/api/v1/ticTacToe', score)
+      .then(response => {
+        console.log('Score saved successfully:', response.data);
+        // Handle success if needed
+      })
+      .catch(error => {
+        console.error('Error saving score:', error);
+        // Handle error if needed
+      });
   };
 
 

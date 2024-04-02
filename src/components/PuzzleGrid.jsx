@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import Sudoku from './puzzles/Sudoku';
 import TicTacToe from './puzzles/TicTacToe';
-import NonogramPuzzle from './puzzles/Nonogram';
+// import TicTacToe from './puzzles/TicTacToe';
+import Twenty48 from './puzzles/Twenty48';
 
 function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds, setSeconds }) {
   const [randomComponent, setRandomComponent] = useState(null);
 
   const handleStartClick = () => {
-    const randomIndex = Math.floor(Math.random() * 2);
+    const randomIndex = Math.floor(Math.random() * 3);
     setShowComponent(randomIndex)
   };
 
@@ -26,6 +27,12 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent, seconds, setS
         <>
           <p>Tic-Tac-Toe puzzle grid.</p>
           <TicTacToe difficulty={difficulty} seconds={seconds} setShowComponent={setShowComponent} setSeconds={setSeconds} />
+        </> : false
+      }
+      {showComponent === 2 ?
+        <>
+          <p>2048 puzzle grid.</p>
+          <Twenty48 difficulty={difficulty} seconds={seconds} setShowComponent={setShowComponent} setSeconds={setSeconds} />
         </> : false
       }
     </div >

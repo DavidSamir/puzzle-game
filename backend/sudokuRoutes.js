@@ -6,10 +6,9 @@ const router = express.Router();
 
 router.post('/sudoku', (req, res) => {
   try {
-    console.log("YOYOY")
-    const { timeTaken, incorrectCells, emptyCells, grid } = req.body;
-    const query = `INSERT INTO sudoku (time, incorrect_cells, empty_cells, date, sudoku) VALUES (?, ?, ?, ?, ?)`;
-    const values = [timeTaken, incorrectCells, emptyCells, new Date(), JSON.stringify(grid)];
+    const { time, incorrectCells, emptyCells, data } = req.body;
+    const query = `INSERT INTO sudoku (time, incorrect_cells, empty_cells, date, data) VALUES (?, ?, ?, ?, ?)`;
+    const values = [time, incorrectCells, emptyCells, new Date(), JSON.stringify(data)];
 
     // Execute query
     connection.query(query, values, (error, results) => {

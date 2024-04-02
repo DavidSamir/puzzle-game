@@ -51,32 +51,4 @@ router.get('/sudoku/:id', (req, res) => {
   });
 });
 
-router.put('/sudoku/:id', (req, res) => {
-  const id = req.params.id;
-  const { timeTaken, incorrectCells, emptyCells, grid } = req.body;
-  const query = 'UPDATE sudoku SET time = ?, incorrect_cells = ?, empty_cells = ?, date = ?, sudoku = ? WHERE id = ?';
-  const values = [timeTaken, incorrectCells, emptyCells, new Date(), JSON.stringify(grid), id];
-  connection.query(query, values, (error) => {
-    if (error) {
-      console.error('Error updating sudoku in MySQL:', error);
-      res.status(500).json({ message: 'Failed to update sudoku' });
-      return;
-    }
-    res.status(200).json({ message: 'Data updated successfully' });
-  });
-});
-
-router.delete('/sudoku/:id', (req, res) => {
-  const id = req.params.id;
-  connection.query('DELETE FROM sudoku WHERE id = ?', id, (error) => {
-    if (error) {
-      console.error('Error deleting sudoku from MySQL:', error);
-      res.status(500).json({ message: 'Failed to delete sudoku' });
-      return;
-    }
-    res.status(200).json({ message: 'Data deleted successfully' });
-  });
-});
-
-
 module.exports = router;

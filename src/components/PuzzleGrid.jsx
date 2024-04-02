@@ -7,7 +7,7 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
   const [randomComponent, setRandomComponent] = useState(null);
 
   const handleStartClick = () => {
-    const randomIndex = Math.floor(Math.random() * 3);
+    const randomIndex = Math.floor(Math.random() * 2);
     setShowComponent(randomIndex)
   };
 
@@ -25,11 +25,6 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
         <>
           <p>Nonogram puzzle grid.</p>
           <NonogramPuzzle difficulty={difficulty} />
-        </> : false
-      }
-      {showComponent === 2 ?
-        <>
-          <p>WAIT .</p>
         </> : false
       }
     </div >

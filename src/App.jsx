@@ -8,6 +8,7 @@ import './App.css'
 
 function App() {
   const [difficulty, setDifficulty] = useState('easy');
+  const [showComponent, setShowComponent] = useState(false);
   
   const handleDifficultyChange = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty);
@@ -21,8 +22,8 @@ function App() {
         difficulty={difficulty}
         onChange={handleDifficultyChange}
       />
-      <Timer />
-      <PuzzleGrid difficulty={difficulty} />
+      <Timer  start={showComponent} />
+      <PuzzleGrid difficulty={difficulty} showComponent={showComponent} setShowComponent={setShowComponent} />
       <Scoreboard />
     </div>
   );

@@ -21,12 +21,25 @@
   align-items: center;
 }
 
-/* Style for filled cells */
 .cell:not(:empty) {
   background-color: #f0f0f0;
 }
 
-/* Style for selected cell */
 .cell.selected {
   background-color: #b3d9ff;
+}
+
+input.nos {
+  color: #fff;
+  background: #fff;
+  width: auto;
+  display: block;
+  min-width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

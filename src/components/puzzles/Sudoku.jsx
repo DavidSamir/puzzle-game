@@ -106,7 +106,11 @@ function Sudoku({ difficulty }) {
 
     return emptyGrid;
   };
-
+  const handleInputChange = (e, rowIndex, colIndex) => {
+    const newGrid = [...grid];
+    newGrid[rowIndex][colIndex] = e.target.value !== '' ? parseInt(e.target.value, 10) : '';
+    setGrid(newGrid);
+  };
   return (
     <div className="puzzle-grid">
       {/* Display the puzzle grid */}
@@ -114,7 +118,18 @@ function Sudoku({ difficulty }) {
         <div key={rowIndex} className="row">
           {row.map((cell, colIndex) => (
             <div key={colIndex} className="cell">
-              {cell !== 0 ? cell : ''}
+              {cell !== 0 ? (
+                cell
+              ) : (
+                <input
+                  type="text"
+                  className='nos'
+                  maxLength="1"
+                  defaultValue={""}
+                  value={grid[rowIndex][colIndex]}
+                  onChange={(e) => handleInputChange(e, rowIndex, colIndex)}
+                />
+              )}
             </div>
           ))}
         </div>

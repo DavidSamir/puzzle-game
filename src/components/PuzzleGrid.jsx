@@ -14,7 +14,7 @@ function PuzzleGrid({ difficulty, showComponent, setShowComponent }) {
 
   return (
     <div className="puzzle-grid">
-      {!showComponent && <button onClick={handleStartClick}>Start</button>}
+      {showComponent === undefined && <button onClick={handleStartClick}>Start Random Game</button>}
       {showComponent === 0 ?
         <>
           <p>Sudoku puzzle grid.</p>

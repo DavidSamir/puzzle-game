@@ -125,8 +125,6 @@ function Sudoku({ difficulty }) {
                   type="text"
                   className='nos'
                   maxLength="1"
-                  defaultValue={""}
-                  value={grid[rowIndex][colIndex]}
                   onChange={(e) => handleInputChange(e, rowIndex, colIndex)}
                 />
               )}

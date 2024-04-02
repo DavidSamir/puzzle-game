@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ScoreTicTacToe from '../ScoreticTacToe';
 
 const TicTacToe = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -49,34 +50,68 @@ const TicTacToe = ({ difficulty, seconds, setShowComponent, setSeconds }) => {
     );
   };
 
+  const calculateScore = () => {
+    return {
+      time: seconds,
+      date: new Date(),
+      data: board,
+      winner: calculateWinner(board)
+    }
+  }
+  const saveScore = () => {
+    let scores = JSON.parse(localStorage.getItem('ticTacToe')) || [];
+    const score = calculateScore();
+    scores.push(score);
+    localStorage.setItem('ticTacToe', JSON.stringify(scores));
+    setShowComponent(undefined)
+    setSeconds(0);
+    // axios.post('http://localhost:3000/api/v1/ticTacToe', score)
+    //   .then(response => {
+    //     console.log('Score saved successfully:', response.data);
+    //     // Handle success if needed
+    //   })
+    //   .catch(error => {
+    //     console.error('Error saving score:', error);
+    //     // Handle error if needed
+    //   });
+  };
+
+
+
   const status = winner
     ? `Winner: ${winner}`
     : `Next player: ${xIsNext ? 'X' : 'O'}`;
 
   return (
-    <div>
-      <div className="status">{status}</div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
+    <>
+      <div>
+        <div className="status">{status}</div>
+        <div className='tttContaier'>
+          <div className="board-row">
+            {renderSquare(0)}
+            {renderSquare(1)}
+            {renderSquare(2)}
+          </div>
+          <div className="board-row">
+            {renderSquare(3)}
+            {renderSquare(4)}
+            {renderSquare(5)}
+          </div>
+          <div className="board-row">
+            {renderSquare(6)}
+            {renderSquare(7)}
+            {renderSquare(8)}
+          </div>
+          <div className='flex'>
+            <p onClick={() => { setShowComponent(undefined); setSeconds(0) }} className='btn'> Back </p>
+            <p onClick={() => { saveScore() }} className='btn'> save </p>
+          </div>
+        </div>
       </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
+      <div>
+        <ScoreTicTacToe />
       </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-      <div className='flex'>
-        <p onClick={() => { setShowComponent(undefined); setSeconds(0) }} className='btn'> Back </p>
-        <p onClick={() => { saveScore() }} className='btn'> save </p>
-      </div>
-
-    </div>
+    </>
   );
 };
 

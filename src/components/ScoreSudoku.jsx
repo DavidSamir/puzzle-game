@@ -3,19 +3,31 @@
 
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import axios from 'axios';
+
 
 const Scoreboard = ({ seconds }) => {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    const localStorageData = JSON.parse(localStorage.getItem('sudokuScore'));
-    if (localStorageData) {
-      // Sort tableData in reverse order based on the 'time' property
-      const sortedData = localStorageData.sort((a, b) => b.time - a.time);
-      setTableData(sortedData);
-    }
 
-  }, [seconds]);
+    axios.get('http://localhost:3000/api/v1/sudoku')
+    .then(response => {
+      if (response.status ==200 ) {
+        setTableData(response.data)
+      }
+      // Handle success if needed
+    })
+    .catch(error => {
+      console.log(error)
+      const localStorageData = JSON.parse(localStorage.getItem('sudokuScore'));
+      if (localStorageData) {
+        const sortedData = localStorageData.sort((a, b) => b.time - a.time);
+        setTableData(sortedData);
+      }
+    });
+
+  }, []);
 
   return (
     <div className="table-container">
@@ -33,8 +45,8 @@ const Scoreboard = ({ seconds }) => {
           {tableData.map((item, index) => (
             <tr key={index} className="table-row">
               <td className="table-data">{item.time} <small>Seconds</small></td>
-              <td className="table-data">{item.incorrectCells}</td>
-              <td className="table-data">{item.emptyCells}</td>
+              <td className="table-data">{item.incorrectCells?item.incorrectCells:item.incorrect_cells}</td>
+              <td className="table-data">{item.emptyCells?item.emptyCells:item.empty_cells}</td>
               <td className="table-data">{moment(item.date).fromNow()}</td>
             </tr>
           ))}

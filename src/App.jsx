@@ -21,7 +21,7 @@ function App() {
       <h1>Puzzle Game</h1>
       <DifficultySelector difficulty={difficulty} onChange={handleDifficultyChange} />
       <Timer start={showComponent} seconds={seconds} setSeconds={setSeconds} />
-      <PuzzleGrid difficulty={difficulty} showComponent={showComponent} setShowComponent={setShowComponent} seconds={seconds} />
+      <PuzzleGrid difficulty={difficulty} showComponent={showComponent} setShowComponent={setShowComponent} seconds={seconds} setSeconds={setSeconds} />
       <Scoreboard />
     </div>
   );

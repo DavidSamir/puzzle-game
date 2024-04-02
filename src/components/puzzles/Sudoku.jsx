@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Sudoku({ difficulty, seconds }) {
+function Sudoku({ difficulty, seconds, setShowComponent, setSeconds }) {
   const [grid, setGrid] = useState([]);
   const [highlightedCells, setHighlightedCells] = useState([]);
 
@@ -143,9 +143,11 @@ function Sudoku({ difficulty, seconds }) {
   const saveScore = () => {
     let scores = JSON.parse(localStorage.getItem('sudokuScore')) || [];
     const score = calculateScore();
+    console.log(scores)
     scores.push(score);
     localStorage.setItem('sudokuScore', JSON.stringify(scores));
     setShowComponent(undefined)
+    setSeconds(0)
   };
 
 
